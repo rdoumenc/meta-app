@@ -2,8 +2,8 @@
 
 ### BEGIN INIT INFO
 # Provides:          arhome
-# Required-Start:    $remote_fs $syslog
-# Required-Stop:     $remote_fs $syslog
+# Required-Start:    $remote_fs $syslog $network
+# Required-Stop:     $remote_fs $syslog $network
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # Short-Description: ARhome application
@@ -19,7 +19,7 @@ test -x "$arhome" || exit 0
 case "$1" in
   start)
     echo -n "Starting arhome"
-    start-stop-daemon --start --quiet --exec $arhome -- $arhome_args
+    start-stop-daemon --start --quiet --background --exec $arhome -- $arhome_args
     ;;
   stop)
     echo -n "Stopping arhome"
@@ -35,7 +35,7 @@ case "$1" in
         echo -n "."
     done
     echo -n "Starting arhome"
-    start-stop-daemon --start --quiet --exec $arhome -- $arhome_args
+    start-stop-daemon --start --quiet --background --exec $arhome -- $arhome_args
     ;;
   *)
     echo "Usage: /etc/init.d/arhome {start|stop|restart}"
